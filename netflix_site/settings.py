@@ -85,14 +85,14 @@ WSGI_APPLICATION = 'netflix_site.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'amikomovie_database',  # Your Azure PostgreSQL database name
-        'USER': 'amikomovie@amikomovie',  # Your full username
-        'PASSWORD': 'Cloud_1234',  # Your password
-        'HOST': 'amikomovie.postgres.database.azure.com',  # Your Azure database host
-        'PORT': '5432',  # Default PostgreSQL port
+        'NAME': 'amikomovie_database',
+        'USER': 'amikomovie@amikomovie',
+        'PASSWORD': 'Cloud_1234',  # Make sure this is the correct password
+        'HOST': 'amikomovie.postgres.database.azure.com',
+        'PORT': '5432',
         'OPTIONS': {
-            'sslmode': 'require',  # Required for secure connection to Azure
-        },
+            'sslmode': 'require'
+        }
     }
 }
 
