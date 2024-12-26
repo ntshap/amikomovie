@@ -82,14 +82,14 @@ WSGI_APPLICATION = 'netflix_site.wsgi.application'
 #     }
 # }
 
+cnx = psycopg2.connect(user="amikomovie", password="{your_password}", host="amikomovie.postgres.database.azure.com", port=5432, database="postgres")
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'amikomovie_database',
-        'USER': 'postgres',
-        'PASSWORD': 'Cloud_1234',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'OPTIONS': {
+            'connection': cnx,
+        },
     }
 }
 
