@@ -1,0 +1,91 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Netflix Clone</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/style.css' %}" />
+</head>
+<body class="text-white" style="background-color: #141414;">
+    <header class="p-5 flex justify-between items-center">
+        <img src="https://pbs.twimg.com/media/GfuSpOZbEAAU3iX?format=png&name=medium" height="30" alt="Netflix Logo" width="110">
+        
+        <nav class="flex space-x-5">
+            <span><a href="/">Home</a></span>
+            
+            <div class="dropdown">
+                <span id="dropdownMenuButton" class="cursor-pointer">Genres ▼</span>
+                <div id="dropdownMenu" class="dropdown-content hidden">
+                    <ul><a href="/genre/action/">Action</a></ul>
+                    <ul><a href="/genre/comedy/">Comedy</a></ul>
+                    <ul><a href="/genre/drama/">Drama</a></ul>
+                    <ul><a href="/genre/horror/">Horror</a></ul>
+                    <ul><a href="/genre/romance/">Romance</a></ul>
+                    <ul><a href="/genre/sciencefiction/">Science Fiction</a></ul>
+                    <ul><a href="/genre/fantasy/">Fantasy</a></ul>
+                </div>
+            </div>
+
+            <span><a href="/my-list">My List</a></span>
+            <span><a href="/about">About</a></span>
+        </nav>
+
+        <div class="flex space-x-5 items-center">
+            <div class="relative">
+                <a href="#" class="block p-2">Welcome, {{user.username}}</a>
+                <a href="/logout" class="block p-2">Logout</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Team Section -->
+    <section class="container mx-auto px-4 py-16">
+        <h1 class="text-4xl font-bold mb-8 text-center">Meet Our Team</h1>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <!-- Team Member 1 -->
+            <div class="bg-gray-800 rounded-lg overflow-hidden">
+                <img src="{% static 'assets/team/member1.jpg' %}" alt="John Doe" class="w-full h-64 object-cover">
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2">Labib aziz maalikulhaq (22.83.0921)</h3>
+                    <p class="text-red-500 mb-4">Teknik komputer amikom</p>
+                    <p class="text-gray-400">Saya suka kemah</p>
+                </div>
+            </div>
+
+            <!-- Team Member 2 -->
+            <div class="bg-gray-800 rounded-lg overflow-hidden">
+                <img src="{% static 'assets/team/member2.jpg' %}" alt="Sarah Wilson" class="w-full h-64 object-cover">
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2">Natasha Putri Rondonuwu (22.83.0943)</h3>
+                    <p class="text-red-500 mb-4">Teknik komputer amikom</p>
+                    <p class="text-gray-400">404</p>
+                </div>
+            </div>
+
+            <!-- Team Member 3 -->
+            <div class="bg-gray-800 rounded-lg overflow-hidden">
+                <img src="{% static 'assets/team/member3.jpg' %}" alt="Mike Johnson" class="w-full h-64 object-cover">
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2">Janeri Amanda (22.83.0913)</h3>
+                    <p class="text-red-500 mb-4">Teknik komputer amikom</p>
+                    <p class="text-gray-400">Saya suka langit.</p>
+                </div>
+            </div>
+
+            <!-- Team Member 4 -->
+            <div class="bg-gray-800 rounded-lg overflow-hidden">
+                <img src="{% static 'assets/team/member4.jpg' %}" alt="Emily Chen" class="w-full h-64 object-cover">
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2">Galih nur massaid (22.83.0918)</h3>
+                    <p class="text-red-500 mb-4">Teknik komputer amikom</p>
+                    <p class="text-gray-400">Never stop exploring</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
