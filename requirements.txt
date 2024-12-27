@@ -11,7 +11,7 @@ psycopg2-binary==2.9.9
 requests==2.28.2
 sniffio==1.3.1
 sqlparse==0.5.3
-starlete==0.26.1
+starlette==0.26.1
 typing_extensions==4.12.2
 tzdata==2024.2
 urllib3==1.26.20
