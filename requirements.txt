@@ -15,4 +15,3 @@ starlette==0.26.1
 typing_extensions==4.12.2
 tzdata==2024.2
 urllib3==1.26.20
-whitenoise==6.8.2
