@@ -66,4 +66,4 @@ jobs:
         with:
           app-name: 'amikomovie'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_827C6D57501143FBAA0D8A1B2CF6A76B }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_2F9217C9619440E087EE721C0F022CA9 }}
