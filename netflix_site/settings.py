@@ -82,27 +82,19 @@ WSGI_APPLICATION = 'netflix_site.wsgi.application'
 #     }
 # }
 
-if DEBUG:  # Development settings
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'amikomovie',
+        'USER': 'amikomovie',
+        'PASSWORD': 'Cloud_1234',
+        'HOST': 'amikomovie.postgres.database.azure.com',
+        'PORT': '5432',
+        'OPTIONS': {
+            'sslmode': 'require'
         }
     }
-else:  # Production settings
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': 'postgres',
-            'USER': 'amikomovie',
-            'PASSWORD': '{your_password}',
-            'HOST': 'amikomovie.postgres.database.azure.com',
-            'PORT': '5432',
-            'OPTIONS': {
-                'sslmode': 'require'
-            }
-        }
-    }
+}
 
 
 
