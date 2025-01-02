@@ -86,9 +86,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'postgres',
-        'USER': 'amikom',
-        'PASSWORD': 'Cloud_1234',  # Replace with actual password
-        'HOST': 'amikomoviewebb.postgres.database.azure.com',
+        'USER': 'amikomovie',
+        'PASSWORD': 'Cloud_1234',
+        'HOST': 'amikomovieweb.postgres.database.azure.com',
         'PORT': '5432',
         'OPTIONS': {
             'sslmode': 'require'
