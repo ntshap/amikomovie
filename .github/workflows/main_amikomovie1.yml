@@ -2,11 +2,13 @@
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 # More info on Python, GitHub Actions, and Azure App Service: https://aka.ms/python-webapps-actions
 name: Build and deploy Python app to Azure Web App - amikomovie1
+
 on:
   push:
     branches:
       - main
   workflow_dispatch:
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -20,17 +22,53 @@ jobs:
         run: |
           python -m venv venv
           source venv/bin/activate
-
-name: Install dependencies
-run: pip install -r requirements.txt
-
-# Optional: Add step to run tests here (PyTest, Django test suites, etc.)
-
-name: Zip artifact for deployment run: zip release.zip ./* -r
-name: Upload artifact for deployment jobs uses: actions/upload-artifact@v4 with: name: python-app path: | release.zip !venv/ deploy: runs-on: ubuntu-latest needs: build environment: name: 'Production' url: ${{ steps.deploy-to-webapp.outputs.webapp-url }} permissions: id-token: write #This is required for requesting the JWT steps:
-name: Download artifact from build job uses: actions/download-artifact@v4 with: name: python-app
-name: Unzip artifact for deployment
-run: unzip release.zip
-
-name: Login to Azure uses: azure/login@v2 with: client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_C6FCF148A1E54FCCB470A760149B8D15 }} tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_9F4FBE55BC634A819825E202DBD07C85 }} subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_B842E5A07D1F45A18922F7F0DFDAAE29 }}
-name: 'Deploy to Azure Web App' uses: azure/webapps-deploy@v3 id: deploy-to-webapp with: app-name: 'amikomovie1' slot-name: 'Production'
+      
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+        
+      - name: Django migrations
+        run: |
+          python manage.py makemigrations
+          python manage.py migrate
+    
+      - name: Collect static files
+        run: python manage.py collectstatic --noinput
+        
+      # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
+      - name: Zip artifact for deployment
+        run: zip release.zip ./* -r
+      - name: Upload artifact for deployment jobs
+        uses: actions/upload-artifact@v4
+        with:
+          name: python-app
+          path: |
+            release.zip
+            !venv/
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    environment:
+      name: 'Production'
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+    permissions:
+      id-token: write #This is required for requesting the JWT
+    steps:
+      - name: Download artifact from build job
+        uses: actions/download-artifact@v4
+        with:
+          name: python-app
+      - name: Unzip artifact for deployment
+        run: unzip release.zip
+      
+      - name: Login to Azure
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_C6FCF148A1E54FCCB470A760149B8D15 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_9F4FBE55BC634A819825E202DBD07C85 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_B842E5A07D1F45A18922F7F0DFDAAE29 }}
+      - name: 'Deploy to Azure Web App'
+        uses: azure/webapps-deploy@v3
+        id: deploy-to-webapp
+        with:
+          app-name: 'amikomovie1'
+          slot-name: 'Production'
