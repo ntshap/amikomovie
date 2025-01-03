@@ -84,14 +84,18 @@ WSGI_APPLICATION = 'netflix_site.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'amikomovie',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'amikomdatabase',  # Diubah sesuai nama database di Azure
         'USER': 'amikomovie',
         'PASSWORD': 'Cloud_1234',
-        'HOST': 'amikomovie.postgres.database.azure.com',
-        'PORT': '5432',
+        'HOST': 'amikomovie.mysql.database.azure.com',
+        'PORT': '3306',
         'OPTIONS': {
-            'sslmode': 'require'
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+            'charset': 'utf8mb4',
+            'ssl': {
+                'ssl-mode': 'required'
+            }
         }
     }
 }
