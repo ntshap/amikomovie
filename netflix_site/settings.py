@@ -3,17 +3,11 @@ import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# SECURITY WARNING: jangan gunakan debug=True di production!
-DEBUG = False
+# Ubah ke True sementara untuk melihat error detail
+DEBUG = True
 
-# Tambahkan domain Azure Anda ke ALLOWED_HOSTS
-ALLOWED_HOSTS = [
-    'amikomovie0-ewhkdgchd0eeh0hc.canadacentral-01.azurewebsites.net',
-    'localhost',
-    '127.0.0.1'
-]
+ALLOWED_HOSTS = ['*']
 
-# Aplikasi yang terinstall
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -22,13 +16,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'core',
-    'whitenoise.runserver_nostatic',  # Tambahkan whitenoise
 ]
 
-# Tambahkan Whitenoise middleware
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',  # Tambahkan setelah SecurityMiddleware
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -37,7 +28,26 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-# Database dengan timeout settings
+ROOT_URLCONF = 'netflix_site.urls'
+
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [BASE_DIR, 'templates'],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
+
+WSGI_APPLICATION = 'netflix_site.wsgi.application'
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -47,49 +57,24 @@ DATABASES = {
         'HOST': 'amikomovie.postgres.database.azure.com',
         'PORT': '5432',
         'OPTIONS': {
-            'sslmode': 'require',
-            'connect_timeout': 30,
-        },
-        'CONN_MAX_AGE': 60,
+            'sslmode': 'require'
+        }
     }
 }
 
-# Logging konfigurasi
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'console': {
-            'class': 'logging.StreamHandler',
-        },
-    },
-    'loggers': {
-        'django': {
-            'handlers': ['console'],
-            'level': 'WARNING',
-        },
-    },
-}
+LANGUAGE_CODE = 'en-us'
+TIME_ZONE = 'UTC'
+USE_I18N = True
+USE_TZ = True
 
-# Static files konfigurasi
 STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
-# Security settings
-CSRF_TRUSTED_ORIGINS = [
-    'https://amikomovie0-ewhkdgchd0eeh0hc.canadacentral-01.azurewebsites.net',
-    'https://django-netflix-clone-dev-tmkz.4.us-1.fl0.io'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
 ]
-CSRF_COOKIE_SECURE = True
-SESSION_COOKIE_SECURE = True
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-SECURE_SSL_REDIRECT = True
-SECURE_HSTS_SECONDS = 31536000
-SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-SECURE_HSTS_PRELOAD = True
 
-# Timeout settings
-SESSION_COOKIE_AGE = 3600  # 1 jam
-SESSION_SAVE_EVERY_REQUEST = True
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+CSRF_TRUSTED_ORIGINS = ['https://amikomovie0-ewhkdgchd0eeh0hc.canadacentral-01.azurewebsites.net']
