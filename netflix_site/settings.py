@@ -85,12 +85,14 @@ WSGI_APPLICATION = 'netflix_site.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'amikomovie_database',          # You can keep the same database name
-        'USER': 'postgres',            # Default PostgreSQL username
-        'PASSWORD': 'Cloud_1234',    # Replace with your local PostgreSQL password
-        'HOST': 'localhost',           # Since we're using local database
+        'NAME': 'amikomovie',
+        'USER': 'amikomovie',
+        'PASSWORD': 'Cloud_1234',
+        'HOST': 'amikomovie.postgres.database.azure.com',
         'PORT': '5432',
-        # Remove the OPTIONS since we don't need SSL for local connection
+        'OPTIONS': {
+            'sslmode': 'require'
+        }
     }
 }
 
@@ -144,7 +146,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-CSRF_TRUSTED_ORIGINS = ['https://django-netflix-clone-dev-tmkz.4.us-1.fl0.io']
+CSRF_TRUSTED_ORIGINS = ['https://amikomovie0-ewhkdgchd0eeh0hc.canadacentral-01.azurewebsites.net']
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
