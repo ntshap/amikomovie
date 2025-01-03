@@ -84,15 +84,13 @@ WSGI_APPLICATION = 'netflix_site.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'amikomovie',
-        'USER': 'amikomovie',
-        'PASSWORD': 'Cloud_1234',
-        'HOST': 'amikomovie.postgres.database.azure.com',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'amikomovie_database',          # You can keep the same database name
+        'USER': 'postgres',            # Default PostgreSQL username
+        'PASSWORD': 'Cloud_1234',    # Replace with your local PostgreSQL password
+        'HOST': 'localhost',           # Since we're using local database
         'PORT': '5432',
-        'OPTIONS': {
-            'sslmode': 'require'
-        }
+        # Remove the OPTIONS since we don't need SSL for local connection
     }
 }
 
